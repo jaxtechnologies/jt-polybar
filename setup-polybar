@@ -1,0 +1,88 @@
+#!/bin/bash
+# NAME: JT-POLYBAR
+# DESC: An installation and deployment script for JaxTech's Debian desktop.
+
+
+INSTALL_PATH=$(pwd)
+LOG=$INSTALL_PATH/jaxtech_polybar_setup.log
+rm $LOG > /dev/null 2>&1
+
+clear
+
+echo -ne "
+   ████████╗  █████╗  ██╗   ██╗  ████████╗ ███████╗  ██████╗ ██╗  ██╗
+   ╚══██╔══╝ ██╔══██╗  ██╗ ██╔╝  ╚══██╔══╝ ██╔════╝ ██╔════╝ ██║  ██║
+      ██║    ███████║   ████╔╝      ██║    ███████╗ ██║      ███████║
+   ██ ██║    ██╔══██║  ██╔╝██╗      ██║    ██╔════╝ ██║      ██╔══██║
+   ╚███╔╝    ██║  ██║ ██╔╝  ██╗     ██║    ███████╗ ╚██████╗ ██║  ██║
+    ╚══╝     ╚═╝  ╚═╝ ╚═╝   ╚═╝     ╚═╝    ╚══════╝  ╚═════╝ ╚═╝  ╚═╝
+"
+echo ""
+echo " Jax|Tech PolyBar Setup Script will launch in 5 seconds..."
+
+sleep 5
+
+clear
+
+############################################################################################
+#################################### UPDATE BASE SYSTEM ####################################
+############################################################################################
+    clear
+    echo "" 2>&1 | tee -a $LOG
+    echo "Updating Current Packages and Source Lists...  Please be patient..." 2>&1 | tee -a $LOG
+    echo ""
+    echo Please enter sudo password to Update Current Packages...
+    sleep 2
+
+    sudo apt-get update 2>&1 | tee -a $LOG
+
+    sleep 5
+
+
+    ############### Install Polybar and Apps
+    sudo apt-get install polybar mpd mpc ncmpcpp rofi -y 2>&1
+    sudo cp -r $INSTALL_PATH/fonts/jaxtech /usr/share/fonts/ 2>&1 | tee -a $LOG
+    sudo cp $INSTALL_PATH/scripts/* /usr/local/bin/ 2>&1 | tee -a $LOG
+    [ ! -d ~/.config/mpd ] && mkdir -p ~/.config/mpd 2>&1 | tee -a $LOG
+    [ ! -d ~/.config/ncmpcpp ] && mkdir -p ~/.config/ncmpcpp 2>&1 | tee -a $LOG
+    [ ! -d ~/.config/polybar ] && mkdir -p ~/.config/polybar 2>&1 | tee -a $LOG
+    [ ! -d ~/.config/rofi ] && mkdir -p ~/.config/rofi 2>&1 | tee -a $LOG
+    cp $INSTALL_PATH/configs/autostart/mpd.desktop ~/.config/autostart/ 2>&1 | tee -a $LOG
+    cp $INSTALL_PATH/configs/autostart/polybar.desktop ~/.config/autostart/ 2>&1 | tee -a $LOG
+    cp $INSTALL_PATH/configs/mpd/* ~/.config/mpd/ 2>&1 | tee -a $LOG
+    cp $INSTALL_PATH/configs/ncmpcpp/* ~/.config/ncmpcpp/ 2>&1 | tee -a $LOG
+    cp $INSTALL_PATH/configs/polybar/* ~/.config/polybar/ 2>&1 | tee -a $LOG
+    cp -r $INSTALL_PATH/configs/rofi/* ~/.config/rofi/ 2>&1 | tee -a $LOG
+    cp -r $INSTALL_PATH/music/* ~/Music/ 2>&1 | tee -a $LOG
+    touch ~/.config/mpd/mpd.db 2>&1 | tee -a $LOG
+    touch ~/.config/mpd/mpd.log 2>&1 | tee -a $LOG
+    touch ~/.config/mpd/mpd.pid 2>&1 | tee -a $LOG
+    systemctl --user enable mpd.service
+    sleep 5
+
+
+#########################################################################################
+#################################### SETUP COMPLETE #####################################
+#########################################################################################
+clear
+echo ""
+echo ""
+echo " =========================================================================="
+echo "  NOTICE -- To Install Extra Apps, run the 7a_setup_extras_lmde7 script... "
+echo " =========================================================================="
+echo ""
+echo ""
+echo ""
+read -p "Setup is Complete - Reboot the Machine NOW (y/n)? "
+if [ "$REPLY" = "y" ]; then
+
+  echo "" 2>&1 | tee -a $LOG
+  echo Rebooting Now... 2>&1 | tee -a $LOG
+  sudo reboot 2>&1 | tee -a $LOG
+  sleep 2
+  
+else
+	cancel
+fi
+
+exit
