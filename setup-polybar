@@ -1,6 +1,6 @@
 #!/bin/bash
 # NAME: JT-POLYBAR
-# DESC: An installation and deployment script for JaxTech's Debian desktop.
+# DESC: An installation and deployment script for JaxTech's desktop.
 
 
 INSTALL_PATH=$(pwd)
@@ -28,19 +28,28 @@ clear
 #################################### UPDATE BASE SYSTEM ####################################
 ############################################################################################
     clear
-    echo "" 2>&1 | tee -a $LOG
-    echo "Updating Current Packages and Source Lists...  Please be patient..." 2>&1 | tee -a $LOG
-    echo ""
-    echo Please enter sudo password to Update Current Packages...
-    sleep 2
+    # Detect package manager and update system
+    
+    if command -v pacman >/dev/null 2>&1; then
+      echo "Arch-based system detected. Updating with pacman..." 2>&1 | tee -a $LOG
+      echo "Please enter sudo password if requested..."
+      sudo pacman -Syu --noconfirm 2>&1 | tee -a $LOG
+      sudo pacman -S --noconfirm polybar mpd mpc ncmpcpp rofi 2>&1 | tee -a $LOG
+      sleep 5
+    
+    elif command -v apt-get >/dev/null 2>&1; then
+      echo "Debian/Ubuntu-based system detected. Updating with apt-get..." 2>&1 | tee -a $LOG
+      echo "Please enter sudo password if requested..."
+      sudo apt-get update && sudo apt-get upgrade -y 2>&1 | tee -a $LOG
+      sudo apt-get install polybar mpd mpc ncmpcpp rofi -y 2>&1 | tee -a $LOG
+      sleep 5
+    
+    else
+      echo "No supported package manager found."
+      exit 1
+    fi
 
-    sudo apt-get update 2>&1 | tee -a $LOG
-
-    sleep 5
-
-
-    ############### Install Polybar and Apps
-    sudo apt-get install polybar mpd mpc ncmpcpp rofi -y 2>&1
+    ############### Install Configs for Polybar and Apps
     sudo cp -r $INSTALL_PATH/fonts/jaxtech /usr/share/fonts/ 2>&1 | tee -a $LOG
     sudo cp $INSTALL_PATH/scripts/* /usr/local/bin/ 2>&1 | tee -a $LOG
     [ ! -d ~/.config/mpd ] && mkdir -p ~/.config/mpd 2>&1 | tee -a $LOG
