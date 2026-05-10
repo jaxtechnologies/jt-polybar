@@ -56,13 +56,14 @@ clear
     [ ! -d ~/.config/ncmpcpp ] && mkdir -p ~/.config/ncmpcpp 2>&1 | tee -a $LOG
     [ ! -d ~/.config/polybar ] && mkdir -p ~/.config/polybar 2>&1 | tee -a $LOG
     [ ! -d ~/.config/rofi ] && mkdir -p ~/.config/rofi 2>&1 | tee -a $LOG
-    cp $INSTALL_PATH/configs/autostart/mpd.desktop ~/.config/autostart/ 2>&1 | tee -a $LOG
-    cp $INSTALL_PATH/configs/autostart/polybar.desktop ~/.config/autostart/ 2>&1 | tee -a $LOG
-    cp $INSTALL_PATH/configs/mpd/* ~/.config/mpd/ 2>&1 | tee -a $LOG
-    cp $INSTALL_PATH/configs/ncmpcpp/* ~/.config/ncmpcpp/ 2>&1 | tee -a $LOG
-    cp $INSTALL_PATH/configs/polybar/* ~/.config/polybar/ 2>&1 | tee -a $LOG
-    cp -r $INSTALL_PATH/configs/rofi/* ~/.config/rofi/ 2>&1 | tee -a $LOG
+    cp $INSTALL_PATH/.config/autostart/mpd.desktop ~/.config/autostart/ 2>&1 | tee -a $LOG
+    cp $INSTALL_PATH/.config/autostart/polybar.desktop ~/.config/autostart/ 2>&1 | tee -a $LOG
+    cp $INSTALL_PATH/.config/mpd/* ~/.config/mpd/ 2>&1 | tee -a $LOG
+    cp $INSTALL_PATH/.config/ncmpcpp/* ~/.config/ncmpcpp/ 2>&1 | tee -a $LOG
+    cp $INSTALL_PATH/.config/polybar/* ~/.config/polybar/ 2>&1 | tee -a $LOG
+    cp -r $INSTALL_PATH/config/rofi/* ~/.config/rofi/ 2>&1 | tee -a $LOG
     cp -r $INSTALL_PATH/music/* ~/Music/ 2>&1 | tee -a $LOG
+    cp ~/.config/polybar/polybar_archcraft_custom_config.ini ~/.config/polybar/config.ini
     touch ~/.config/mpd/mpd.db 2>&1 | tee -a $LOG
     touch ~/.config/mpd/mpd.log 2>&1 | tee -a $LOG
     touch ~/.config/mpd/mpd.pid 2>&1 | tee -a $LOG
