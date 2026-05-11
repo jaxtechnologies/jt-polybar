@@ -63,7 +63,7 @@ clear
     cp $INSTALL_PATH/.config/polybar/* ~/.config/polybar/ 2>&1 | tee -a $LOG
     cp -r $INSTALL_PATH/.config/rofi/* ~/.config/rofi/ 2>&1 | tee -a $LOG
     cp -r $INSTALL_PATH/music/* ~/Music/ 2>&1 | tee -a $LOG
-    cp ~/.config/polybar/config.ini ~/.config/polybar/
+    cp ~/.config/polybar/polybar_archcraft_custom_config.ini ~/.config/polybar/config.ini
     touch ~/.config/mpd/mpd.db 2>&1 | tee -a $LOG
     touch ~/.config/mpd/mpd.log 2>&1 | tee -a $LOG
     touch ~/.config/mpd/mpd.pid 2>&1 | tee -a $LOG
