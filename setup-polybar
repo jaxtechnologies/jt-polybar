@@ -77,11 +77,6 @@ clear
 clear
 echo ""
 echo ""
-echo " =========================================================================="
-echo "  NOTICE -- To Install Extra Apps, run the 7a_setup_extras_lmde7 script... "
-echo " =========================================================================="
-echo ""
-echo ""
 echo ""
 read -p "Setup is Complete - Reboot the Machine NOW (y/n)? "
 if [ "$REPLY" = "y" ]; then
