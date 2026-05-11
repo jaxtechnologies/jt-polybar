@@ -70,12 +70,12 @@ clear
     systemctl --user enable mpd.service
     sleep 5
 
-# Check if Cinnamon desktop is running
-if [[ "$XDG_CURRENT_DESKTOP" == *"Cinnamon"* ]] || pgrep -x cinnamon >/dev/null 2>&1; then
-    echo "Cinnamon desktop detected"
-
-    gsettings set org.cinnamon.desktop.wm.preferences num-workspaces 3
-fi
+## Check if Cinnamon desktop is running
+#if [[ "$XDG_CURRENT_DESKTOP" == *"Cinnamon"* ]] || pgrep -x cinnamon >/dev/null 2>&1; then
+#    echo "Cinnamon desktop detected"
+#
+#    gsettings set org.cinnamon.desktop.wm.preferences num-workspaces 3
+#fi
 
 
 #########################################################################################
