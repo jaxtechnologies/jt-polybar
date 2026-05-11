@@ -40,7 +40,7 @@ clear
     elif command -v apt-get >/dev/null 2>&1; then
       echo "Debian/Ubuntu-based system detected. Updating with apt-get..." 2>&1 | tee -a $LOG
       echo "Please enter sudo password if requested..."
-      sudo apt-get update && sudo apt-get upgrade -y 2>&1 | tee -a $LOG
+      #sudo apt-get update && sudo apt-get upgrade -y 2>&1 | tee -a $LOG
       sudo apt-get install polybar mpd mpc ncmpcpp rofi -y 2>&1 | tee -a $LOG
       sleep 5
     
